@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Data Science student portfolio" />
+  <title>Madushan Kumara | Data Science Portfolio</title>
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(255,255,255,.09);
+      --text:#eaf0ff;
+      --muted:rgba(234,240,255,.72);
+      --line:rgba(234,240,255,.14);
+      --accent:#7c5cff;
+      --accent2:#22c55e;
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius2:22px;
+      --max:1100px;
+    }
+    body.light{
+      --bg:#f6f7fb;
+      --panel:rgba(0,0,0,.05);
+      --panel2:rgba(0,0,0,.075);
+      --text:#0c1222;
+      --muted:rgba(12,18,34,.7);
+      --line:rgba(12,18,34,.12);
+      --accent:#6d28d9;
+      --accent2:#16a34a;
+      --shadow:0 18px 45px rgba(16,24,40,.12);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background:
+        radial-gradient(1000px 500px at 15% 0%, rgba(124,92,255,.35), transparent 55%),
+        radial-gradient(900px 500px at 85% 10%, rgba(34,197,94,.22), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:min(var(--max), calc(100% - 40px)); margin:0 auto}
+
+    /* Nav */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(0,0,0,.28), rgba(0,0,0,0));
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    body.light .nav{
+      background: linear-gradient(to bottom, rgba(255,255,255,.72), rgba(255,255,255,0));
+      border-bottom:1px solid rgba(0,0,0,.06);
+    }
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:900}
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background: linear-gradient(135deg, var(--accent), rgba(34,197,94,.9));
+      display:grid; place-items:center; font-weight:900;
+      box-shadow: 0 10px 28px rgba(124,92,255,.25);
+    }
+    .brand small{display:block; font-weight:650; color:var(--muted); margin-top:-4px}
+    .nav-links{display:flex; gap:18px; align-items:center}
+    .nav-links a{
+      font-weight:750; color:var(--muted);
+      padding:8px 10px; border-radius:12px; transition:.2s ease;
+    }
+    .nav-links a:hover{background:var(--panel); color:var(--text)}
+    .actions{display:flex; gap:10px; align-items:center}
+    .btn{
+      border:1px solid var(--line);
+      background:var(--panel);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.2s ease;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .btn:hover{transform:translateY(-1px); background:var(--panel2)}
+    .btn.primary{
+      border-color:transparent;
+      background: linear-gradient(135deg, var(--accent), rgba(34,197,94,.95));
+      box-shadow: 0 16px 45px rgba(124,92,255,.22);
+    }
+    .btn.primary:hover{filter:brightness(1.03)}
+    .hamburger{display:none}
+
+    /* Hero */
+    header{padding:64px 0 34px}
+    .hero-grid{display:grid; grid-template-columns: 1.15fr .85fr; gap:28px; align-items:stretch}
+    .card{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+    }
+    body.light .card{background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.72))}
+    .hero-main{padding:28px; position:relative; overflow:hidden}
+    .pill{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid var(--line);
+      background:var(--panel);
+      color:var(--muted);
+      font-weight:800; font-size:14px;
+    }
+    .dot{width:8px;height:8px;border-radius:99px;background:var(--accent2); box-shadow:0 0 0 4px rgba(34,197,94,.15)}
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(30px, 4.2vw, 52px);
+      line-height:1.05;
+      letter-spacing:-.6px;
+    }
+    .lead{color:var(--muted); font-size:16.5px; max-width:62ch}
+    .hero-cta{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px}
+    .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:22px}
+    .stat{padding:12px;border-radius:16px;border:1px solid var(--line);background:var(--panel)}
+    .stat b{font-size:18px;display:block}
+    .stat span{color:var(--muted); font-weight:700; font-size:13px}
+    .hero-side{padding:18px; display:flex; flex-direction:column; gap:12px}
+    .profile{
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(500px 250px at 30% 20%, rgba(124,92,255,.35), transparent 55%),
+        radial-gradient(450px 260px at 70% 30%, rgba(34,197,94,.22), transparent 55%),
+        var(--panel);
+      min-height:220px;
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      position:relative;
+      overflow:hidden;
+    }
+    .profile::before{
+      content:"";
+      position:absolute; inset:-60px -60px auto auto;
+      width:220px; height:220px; border-radius:70px;
+      background: rgba(124,92,255,.15);
+      transform: rotate(18deg);
+      filter: blur(2px);
+    }
+    .profile h3{margin:0; font-size:18px}
+    .profile p{margin:6px 0 0; color:var(--muted); font-weight:700}
+    .mini{padding:14px;border-radius:18px;border:1px solid var(--line);background:var(--panel)}
+    .mini b{display:block;margin-bottom:4px}
+    .mini p{margin:0;color:var(--muted)}
+    .link{
+      font-weight:900;
+      padding:8px 10px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.10);
+      display:inline-flex;
+    }
+    body.light .link{background: rgba(255,255,255,.75)}
+    .link:hover{background:var(--panel2)}
+
+    /* Sections */
+    section{padding:34px 0}
+    .section-title{display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:14px}
+    .section-title h2{margin:0; font-size:22px; letter-spacing:-.3px}
+    .section-title p{margin:0; color:var(--muted); font-weight:700}
+
+    .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+    .tile{
+      padding:16px;border-radius:18px;border:1px solid var(--line);
+      background:var(--panel);
+      transition:.2s ease;
+    }
+    .tile:hover{transform:translateY(-2px); background:var(--panel2)}
+    .tile h3{margin:6px 0 6px; font-size:16px}
+    .tile p{margin:0; color:var(--muted)}
+    .tag{
+      display:inline-flex;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.08);
+      color: var(--muted);
+      font-weight:900;
+      font-size:12px;
+    }
+    body.light .tag{background: rgba(255,255,255,.7)}
+    .chips{display:flex; flex-wrap:wrap; gap:10px}
+    .chip{
+      padding:10px 12px;border-radius:999px;border:1px solid var(--line);
+      background:var(--panel); font-weight:900; color:var(--muted)
+    }
+
+    /* Projects */
+    .projects{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
+    .project{
+      padding:18px;border-radius:20px;border:1px solid var(--line);
+      background:var(--panel);
+      display:flex; flex-direction:column; gap:10px;
+      transition:.2s ease;
+    }
+    .project:hover{transform:translateY(-2px); background:var(--panel2)}
+    .top{display:flex; align-items:flex-start; justify-content:space-between; gap:12px}
+    .project h3{margin:0; font-size:16px}
+    .project p{margin:0; color:var(--muted)}
+    .meta{display:flex; gap:8px; flex-wrap:wrap}
+    .case{
+      padding:14px;border-radius:18px;border:1px solid var(--line);
+      background: rgba(0,0,0,.10);
+      color: var(--muted);
+      font-weight:750;
+    }
+    body.light .case{background: rgba(255,255,255,.75)}
+    .case b{color:var(--text)}
+    .project .links{display:flex; gap:10px; flex-wrap:wrap; margin-top:4px}
+
+    /* Timeline */
+    .timeline{display:grid; gap:12px}
+    .item{
+      padding:16px;border:1px solid var(--line);
+      border-radius:18px;background:var(--panel);
+      display:flex; gap:12px; align-items:flex-start;
+    }
+    .badge{
+      width:42px; height:42px; border-radius:14px;
+      display:grid; place-items:center;
+      background: rgba(124,92,255,.18);
+      border:1px solid rgba(124,92,255,.28);
+      font-weight:900;
+    }
+    .item b{display:block}
+    .item span{color:var(--muted); font-weight:700}
+
+    /* Contact */
+    .contact{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    label{font-weight:900; font-size:13px; color:var(--muted)}
+    input, textarea{
+      width:100%; margin-top:6px; padding:12px 12px;
+      border-radius:14px; border:1px solid var(--line);
+      background:var(--panel); color:var(--text); outline:none; font-size:15px;
+    }
+    textarea{min-height:120px; resize:vertical}
+    input:focus, textarea:focus{border-color: rgba(124,92,255,.55)}
+
+    footer{
+      padding:26px 0 40px;
+      color:var(--muted);
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+    body.light footer{border-top:1px solid rgba(0,0,0,.06)}
+
+    @media (max-width: 900px){
+      .hero-grid{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr}
+      .projects{grid-template-columns:1fr}
+      .contact{grid-template-columns:1fr}
+      .nav-links{display:none}
+      .hamburger{display:inline-flex}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo">DS</div>
+        <div>
+          Madushan Kumara
+          <small>Data Science Student</small>
+        </div>
+      </div>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#certs">Certifications</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="actions">
+        <button class="btn hamburger" id="menuBtn" aria-label="Open menu">☰</button>
+        <button class="btn" id="themeBtn" aria-label="Toggle theme">🌙 <span id="themeText">Dark</span></button>
+        <a class="btn primary" href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header>
+    <div class="container hero-grid">
+      <div class="card hero-main">
+        <div class="pill"><span class="dot"></span> Seeking internship / entry-level</div>
+        <h1>Turning data into insights and simple ML solutions.</h1>
+        <p class="lead">
+          I’m <b>Madushan Kumara</b>, a data science student interested in
+          <b>machine learning</b>, <b>data analysis</b>, and <b>real-world projects</b>.
+          I enjoy building end-to-end work: cleaning data → modeling → evaluation → storytelling.
+        </p>
+
+        <div class="hero-cta">
+          <a class="btn primary" href="#projects">View projects</a>
+          <a class="btn" href="#skills">Skills</a>
+          <a class="btn" href="#" id="resumeBtn">Resume (PDF)</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b>Python</b><span>Pandas • NumPy</span></div>
+          <div class="stat"><b>ML</b><span>scikit-learn</span></div>
+          <div class="stat"><b>Viz</b><span>Matplotlib</span></div>
+        </div>
+      </div>
+
+      <div class="card hero-side">
+        <div class="profile">
+          <h3>Data Science • ML • Analytics</h3>
+          <p>Colombo, Sri Lanka • Open to remote</p>
+        </div>
+
+        <div class="mini">
+          <b>Profiles</b>
+          <p style="display:flex; gap:10px; flex-wrap:wrap; margin-top:8px;">
+            <a class="link" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+            <a class="link" href="https://www.kaggle.com/" target="_blank" rel="noopener">Kaggle</a>
+            <a class="link" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+          </p>
+        </div>
+
+        <div class="mini">
+          <b>What I’m learning</b>
+          <p>Feature engineering • Model evaluation • SQL • Power BI/Tableau</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-title">
+        <h2>About</h2>
+        <p>What I do</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="tile">
+          <span class="tag">Strength</span>
+          <h3>Clean analysis</h3>
+          <p>EDA, data cleaning, feature engineering, and clear notebooks.</p>
+        </div>
+        <div class="tile">
+          <span class="tag">ML</span>
+          <h3>Practical models</h3>
+          <p>Regression, classification, clustering, and basic NLP projects.</p>
+        </div>
+        <div class="tile">
+          <span class="tag">Storytelling</span>
+          <h3>Explain results</h3>
+          <p>Charts + insights with business-friendly explanations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-title">
+        <h2>Skills</h2>
+        <p>Core tools</p>
+      </div>
+
+      <div class="card" style="padding:18px;">
+        <div class="chips">
+          <span class="chip">Python</span>
+          <span class="chip">Pandas</span>
+          <span class="chip">NumPy</span>
+          <span class="chip">scikit-learn</span>
+          <span class="chip">Matplotlib</span>
+          <span class="chip">Seaborn</span>
+          <span class="chip">SQL</span>
+          <span class="chip">Excel</span>
+          <span class="chip">Power BI / Tableau</span>
+          <span class="chip">Git & GitHub</span>
+          <span class="chip">Jupyter Notebook</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-title">
+        <h2>Projects</h2>
+        <p>Replace with your real work</p>
+      </div>
+
+      <div class="projects">
+        <!-- Project 1 -->
+        <div class="project">
+          <div class="top">
+            <div>
+              <span class="tag">Classification</span>
+              <h3>Customer Churn Prediction</h3>
+              <p>Built a churn model with preprocessing, feature engineering, and evaluation.</p>
+            </div>
+            <span class="tag">2026</span>
+          </div>
+
+          <div class="meta">
+            <div class="case"><b>Data:</b> Telecom churn dataset</div>
+            <div class="case"><b>Model:</b> Logistic / RandomForest</div>
+            <div class="case"><b>Metric:</b> F1, ROC-AUC</div>
+          </div>
+
+          <div class="links">
+            <a class="link" href="https://github.com/" target="_blank" rel="noopener">Code</a>
+            <a class="link" href="#" target="_blank" rel="noopener">Notebook</a>
+            <a class="link" href="#" target="_blank" rel="noopener">Report</a>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project">
+          <div class="top">
+            <div>
+              <span class="tag">Regression</span>
+              <h3>House Price Prediction</h3>
+              <p>Trained regression models and compared baseline vs tuned performance.</p>
+            </div>
+            <span class="tag">2026</span>
+          </div>
+
+          <div class="meta">
+            <div class="case"><b>Steps:</b> EDA → cleaning → modeling</div>
+            <div class="case"><b>Model:</b> Linear, XGBoost (optional)</div>
+            <div class="case"><b>Metric:</b> RMSE</div>
+          </div>
+
+          <div class="links">
+            <a class="link" href="https://github.com/" target="_blank" rel="noopener">Code</a>
+            <a class="link" href="#" target="_blank" rel="noopener">Live Demo</a>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project">
+          <div class="top">
+            <div>
+              <span class="tag">NLP</span>
+              <h3>Sentiment Analysis</h3>
+              <p>Text cleaning + vectorization + model evaluation (baseline to improved).</p>
+            </div>
+            <span class="tag">2025</span>
+          </div>
+
+          <div class="meta">
+            <div class="case"><b>Tools:</b> TF-IDF, sklearn</div>
+            <div class="case"><b>Output:</b> Confusion matrix</div>
+          </div>
+
+          <div class="links">
+            <a class="link" href="https://github.com/" target="_blank" rel="noopener">Code</a>
+            <a class="link" href="#" target="_blank" rel="noopener">Notebook</a>
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project">
+          <div class="top">
+            <div>
+              <span class="tag">Dashboard</span>
+              <h3>Sales Analytics Dashboard</h3>
+              <p>Interactive dashboard with KPIs and trends (Power BI/Tableau).</p>
+            </div>
+            <span class="tag">2025</span>
+          </div>
+
+          <div class="meta">
+            <div class="case"><b>KPIs:</b> Revenue, Growth, Top products</div>
+            <div class="case"><b>Skills:</b> SQL + visualization</div>
+          </div>
+
+          <div class="links">
+            <a class="link" href="#" target="_blank" rel="noopener">Dashboard</a>
+            <a class="link" href="#" target="_blank" rel="noopener">Dataset</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container">
+      <div class="section-title">
+        <h2>Education</h2>
+        <p>Academic background</p>
+      </div>
+
+      <div class="timeline">
+        <div class="item">
+          <div class="badge">🎓</div>
+          <div>
+            <b>BSc (Data Science) — Your University</b>
+            <span>2023 – Present</span>
+            <div style="height:6px;"></div>
+            <span>Relevant: Statistics, ML, Databases, Data Mining.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certs">
+    <div class="container">
+      <div class="section-title">
+        <h2>Certifications</h2>
+        <p>Add your courses</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="tile">
+          <span class="tag">Certificate</span>
+          <h3>Google Data Analytics</h3>
+          <p>Data cleaning, SQL, dashboards, and insights.</p>
+        </div>
+        <div class="tile">
+          <span class="tag">Certificate</span>
+          <h3>Machine Learning (Coursera)</h3>
+          <p>Supervised learning + evaluation basics.</p>
+        </div>
+        <div class="tile">
+          <span class="tag">Workshop</span>
+          <h3>Power BI / Tableau</h3>
+          <p>Dashboards and KPI reporting.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-title">
+        <h2>Contact</h2>
+        <p>Send a message</p>
+      </div>
+
+      <div class="contact">
+        <div class="card" style="padding:18px;">
+          <h3 style="margin:0 0 8px;">Email me</h3>
+          <p style="margin:0 0 14px; color:var(--muted); font-weight:700;">
+            This opens your email app (mailto). You can later connect Formspree for real submissions.
+          </p>
+
+          <form id="contactForm">
+            <div style="display:grid; gap:12px;">
+              <div>
+                <label>Your Name</label>
+                <input id="name" placeholder="Your name" required />
+              </div>
+              <div>
+                <label>Email</label>
+                <input id="email" type="email" placeholder="you@example.com" required />
+              </div>
+              <div>
+                <label>Message</label>
+                <textarea id="message" placeholder="Write your message..." required></textarea>
+              </div>
+
+              <button class="btn primary" type="submit">Send</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card" style="padding:18px;">
+          <h3 style="margin:0 0 8px;">Details</h3>
+
+          <div class="tile" style="margin-top:12px;">
+            <span class="tag">Email</span>
+            <h3 style="margin:8px 0 0;">kumaramadushan216@gmail.com</h3>
+            <p>Best for internship opportunities & collaborations.</p>
+          </div>
+
+          <div class="tile" style="margin-top:12px;">
+            <span class="tag">Profiles</span>
+            <h3 style="margin:8px 0 0;">GitHub • Kaggle • LinkedIn</h3>
+            <p>Update the profile links in the hero section.</p>
+          </div>
+
+          <div class="tile" style="margin-top:12px;">
+            <span class="tag">What I’m looking for</span>
+            <h3 style="margin:8px 0 0;">Internship / Entry-level</h3>
+            <p>Data Analyst • Data Scientist • ML Intern</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+      <div>© <span id="year"></span> Madushan Kumara. All rights reserved.</div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="link" href="#projects">Projects</a>
+        <a class="link" href="#education">Education</a>
+        <a class="link" href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Theme
+    const themeBtn = document.getElementById("themeBtn");
+    const themeText = document.getElementById("themeText");
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
+      document.body.classList.add("light");
+      themeText.textContent = "Light";
+      themeBtn.firstChild.textContent = "☀️ ";
+    }
+    themeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("light");
+      const isLight = document.body.classList.contains("light");
+      localStorage.setItem("theme", isLight ? "light" : "dark");
+      themeText.textContent = isLight ? "Light" : "Dark";
+      themeBtn.firstChild.textContent = isLight ? "☀️ " : "🌙 ";
+    });
+
+    // Mobile menu
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+    menuBtn?.addEventListener("click", () => {
+      const shown = navLinks.style.display === "flex";
+      navLinks.style.display = shown ? "none" : "flex";
+      navLinks.style.flexDirection = "column";
+      navLinks.style.position = "absolute";
+      navLinks.style.top = "64px";
+      navLinks.style.right = "20px";
+      navLinks.style.padding = "12px";
+      navLinks.style.background = "var(--panel2)";
+      navLinks.style.border = "1px solid var(--line)";
+      navLinks.style.borderRadius = "16px";
+      navLinks.style.backdropFilter = "blur(10px)";
+      navLinks.style.boxShadow = "var(--shadow)";
+    });
+
+    // Resume placeholder
+    document.getElementById("resumeBtn").addEventListener("click", (e) => {
+      e.preventDefault();
+      alert("Add your resume PDF (resume.pdf) and link it here.");
+    });
+
+    // Contact -> mailto
+    document.getElementById("contactForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+      const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+      window.location.href = `mailto:kumaramadushan216@gmail.com?subject=${subject}&body=${body}`;
+    });
+  </script>
+</body>
+</html>
